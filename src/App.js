@@ -4,7 +4,7 @@ import Login from "./login";
 
 function App() {
   return (
-    <GoogleOAuthProvider clientId="188770635170-726qfsa74mh2ojve27imv8ivghc3na0k.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <Login />
     </GoogleOAuthProvider>
   );

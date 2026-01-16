@@ -35,8 +35,8 @@ function Login() {
   };
 
   const handleGitHubLogin = () => {
-    const clientId = "Ov23libcHQvfS7zI5clm";
-    const redirectUri = "http://localhost:3000";
+    const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+    const redirectUri = process.env.REACT_APP_REDIRECT_URI;
     const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email&prompt=select_account`;
     window.location.href = githubAuthUrl;
   };
@@ -46,7 +46,7 @@ function Login() {
     const code = urlParams.get("code");
     if (code && !user) {
       // Send code to backend to exchange for access token and fetch user data
-      fetch('http://localhost:5000/api/auth/github', {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/github`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code })
