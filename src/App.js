@@ -4,7 +4,7 @@ import Login from "./login";
 
 function App() {
   return (
-    <GoogleOAuthProvider clientId="620344024622-u500oqlom5blrkf5abr3533bpa2g4h1t.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="188770635170-726qfsa74mh2ojve27imv8ivghc3na0k.apps.googleusercontent.com">
       <Login />
     </GoogleOAuthProvider>
   );

@@ -6,6 +6,8 @@ import "./Login.css";
 function Login() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
@@ -33,7 +35,7 @@ function Login() {
   };
 
   const handleGitHubLogin = () => {
-    const clientId = "Ov23liu4nLpR7guHNAiV";
+    const clientId = "Ov23libcHQvfS7zI5clm";
     const redirectUri = "http://localhost:3000";
     const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email&prompt=select_account`;
     window.location.href = githubAuthUrl;
@@ -64,9 +66,29 @@ function Login() {
     }
   }, [user]);
 
+  const handleEmailLogin = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    // Demo login - replace with actual authentication
+    const userData = {
+      name: email.split('@')[0],
+      email: email,
+      image: `https://ui-avatars.com/api/?name=${email.split('@')[0]}&background=667eea&color=fff`,
+      provider: "Email"
+    };
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
+    setError("");
+  };
+
   const handleLogout = () => {
     setUser(null);
     setError("");
+    setEmail("");
+    setPassword("");
     localStorage.removeItem("user");
   };
 
@@ -79,7 +101,33 @@ function Login() {
           
           {error && <p className="error-message">{error}</p>}
           
-          <div className="login-buttons">
+          <form onSubmit={handleEmailLogin} className="login-form">
+            <div className="input-group">
+              <input
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-input"
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-input"
+              />
+            </div>
+            <button type="submit" className="login-button">Sign In</button>
+          </form>
+
+          <div className="divider">
+            <span>OR</span>
+          </div>
+          
+          <div className="social-buttons">
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
               onError={handleGoogleFailure}

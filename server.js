@@ -5,8 +5,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const GITHUB_CLIENT_ID = 'Ov23liu4nLpR7guHNAiV';
-const GITHUB_CLIENT_SECRET = '730148d38b7d1566884fda53e90722daa49701f7'; // Replace with your actual secret
+const GITHUB_CLIENT_ID = 'Ov23libcHQvfS7zI5clm';
+const GITHUB_CLIENT_SECRET = 'edfe3ceecaa59094c6437a2d2efeaacd016838df'; // Replace with your actual secret
 
 app.post('/api/auth/github', async (req, res) => {
   const { code } = req.body;
